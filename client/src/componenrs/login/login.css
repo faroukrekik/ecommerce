@@ -1,0 +1,74 @@
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 110vh;
+}
+
+.login-box {
+  position: relative;
+  width: 500px;
+  height: 600px;
+  border: 2px solid gray;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.login-box h2 {
+  color: black;
+  text-align: center;
+  font-size: 32px;
+}
+
+.login-box .input-box {
+  position: relative;
+  margin: 30px 0;
+  width: 310;
+  border-bottom: 2px solid gray;
+}
+
+.login-box .input-box input {
+  width: 100%;
+  height: 45px;
+  border: none;
+  outline: none;
+  padding: 0 20px 0 5px;
+  font-size: 16px;
+}
+
+#btn-login {
+  color: #0171d3;
+  background: white;
+  width: 100%;
+  height: 40px;
+  border-radius: 5px;
+  outline: none;
+  border: solid #0171d3 1px;
+  font-size: 17px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+#btn-login:hover {
+  background: #f0f0f0;
+  color: #0171d3;
+}
+
+#facebook-login {
+  color: #fff;
+  background: #0171d3;
+  border-radius: 5px;
+  height: 45px;
+  cursor: pointer;
+}
+#google-login {
+  border-radius: 5px;
+  height: 45px;
+  cursor: pointer;
+}
+
+.chooselogin h3 {
+  display: flex;
+  justify-content: center;
+}

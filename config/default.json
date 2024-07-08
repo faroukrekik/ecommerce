@@ -1,0 +1,7 @@
+{
+  "db": "mongodb+srv://faroukrekik23:456123azerty@cluster0.q7rtvng.mongodb.net/Ecom?retryWrites=true&w=majority",
+  "secret": "rekik",
+  "key": "faroukecommercekey",
+  "session_secret": "frsession",
+  "STRIPE _SECRET_Key": "sk_test_51P9aRyRxAlUJMtcKsbWcLGBRMEnPJ5eYzuIJGnNqtltlj8PW87BQD5q5eQ74pjhCf7rtfNup360vtlyzfx8brF24007WvAk6iN"
+}
