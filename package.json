@@ -1,0 +1,39 @@
+{
+  "name": "ecommerce-site",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server",
+    "dev": "concurrently \"npm start\" \"cd client && npm start\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.5.2",
+    "@fortawesome/free-brands-svg-icons": "^6.5.2",
+    "@fortawesome/free-regular-svg-icons": "^6.5.2",
+    "@fortawesome/free-solid-svg-icons": "^6.5.2",
+    "@fortawesome/react-fontawesome": "^0.2.2",
+    "axios": "^1.6.8",
+    "bcryptjs": "^2.4.3",
+    "concurrently": "^8.2.2",
+    "config": "^3.3.11",
+    "cookie-session": "^2.1.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "express-session": "^1.18.0",
+    "express-validator": "^7.0.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.1.2",
+    "nodemailer": "^6.9.11",
+    "nodemon": "^3.0.3",
+    "passport": "^0.7.0",
+    "passport-facebook": "^3.0.0",
+    "passport-google-oauth2": "^0.2.0",
+    "react-icons": "^5.0.1",
+    "stripe": "^15.4.0"
+  }
+}
