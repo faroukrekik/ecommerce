@@ -1,11 +1,10 @@
 import React from "react";
-import { editqunt, getCart, removeitem } from "../redux/actions/CartActions";
+import { editqunt, removeitem } from "../redux/actions/CartActions";
 import { useDispatch, useSelector } from "react-redux";
 
 const CartItems = ({ item, userId }) => {
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.userReducer);
-  const { cart, loading } = useSelector((state) => state.CartReducer);
+  const { cart } = useSelector((state) => state.CartReducer);
 
   const handleIncreaseQuantity = async (productId, quantity) => {
     try {

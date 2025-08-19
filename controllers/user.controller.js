@@ -9,7 +9,9 @@ exports.register = async (req, res) => {
   const { name, email, phone, address, password, registerDate, userRole } =
     req.body;
   const existUser = await User.findOne({ email });
-  if (existUser) res.status(409).json({ msg: "user aleardy exist" });
+  if (existUser) {
+    return res.status(409).json({ msg: "user aleardy exist" });
+  }
   try {
     const newUser = new User({
       name,
@@ -25,15 +27,18 @@ exports.register = async (req, res) => {
     newUser.password = hash;
 
     await newUser.save();
+
     const payload = {
       _id: newUser._id,
     };
     let token = jwt.sign(payload, secret);
-    res.send({
+    return res.status(201).send({
       token,
-      _id: newUser._id,
-      name: newUser.name,
-      email: newUser.email,
+      user: {
+        _id: newUser._id,
+        name: newUser.name,
+        email: newUser.email,
+      },
     });
   } catch (error) {
     res.status(500).json({ msg: error.message });
@@ -42,28 +47,50 @@ exports.register = async (req, res) => {
 
 exports.login = async (req, res) => {
   const { email, password } = req.body;
-  try {
-    const user = await User.findOne({ email });
-    if (!user) res.status(404).json({ msg: "wrong information" });
-    const isMatch = await bcryptjs.compare(password, user.password);
-    if (!isMatch) res.status(404).json({ msg: "wrong information" });
 
+  try {
+    // 1. Find user by email
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ msg: "wrong information" });
+    }
+
+    // 2. Compare passwords
+    const isMatch = await bcryptjs.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(404).json({ msg: "wrong information" });
+    }
+
+    // 3. Create JWT payload
     const payload = {
-      _id: user._id,
-    };
-    let token = jwt.sign(payload, secret);
-    res.send({
-      token,
       _id: user._id,
       name: user.name,
       email: user.email,
+      phone: user.phone,
+      address: user.address,
+      registerDate: user.registerDate,
+      userRole: user.userRole,
+    };
+
+    // 4. Generate token
+    const token = jwt.sign(payload, secret, { expiresIn: "1h" }); // Added expiration
+
+    // 5. Send successful response
+    return res.status(200).json({
+      token,
+      user: {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+      },
     });
   } catch (error) {
-    res.status(500).json({ msg: error.message });
+    console.error("Login error:", error);
+    return res.status(500).json({ msg: "Server error" });
   }
 };
-
 exports.auth = (req, res) => {
+  console.log(req.user);
   res.send(req.user);
 };
 
@@ -140,4 +167,15 @@ exports.delcookie = async (req, res) => {
 
 exports.authgoogle = (req, res) => {
   res.send(req.usergoogle);
+};
+
+exports.edituser = async (req, res) => {
+  try {
+    const updateuser = await User.findByIdAndUpdate(req.params.id, {
+      ...req.body,
+    });
+    res.send(updateuser);
+  } catch (error) {
+    res.status(500).json({ msg: error.msg });
+  }
 };

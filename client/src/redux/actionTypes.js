@@ -18,7 +18,7 @@ export const GETPROF = "GETPROF";
 export const GETPROF_SUCCESS = "GETPROF_SUCCESS";
 export const GETPROF_FAIL = "GETPROF_FAIL";
 
-export const LOGOUT_SUCCESS = "LOGOUT_FAIL";
+export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
 export const LOGOUT_FAIL = "LOGOUT_FAIL";
 
 export const GETGOOGLE = "GETGOOGLE";
@@ -48,3 +48,6 @@ export const ADD_PAYMENT_Fail = "ADD_PAYMENT_Fail";
 export const LOGOUT = "LOGOUT";
 
 export const setCredentials = "setCredentials";
+export const EDITUSERS = "EDITUSERS";
+export const EDITUSERS_Success = "EDITUSERS_Success";
+export const EDITUSERS_Fail = "EDITUSERS_Fail";

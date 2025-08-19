@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from "../../utils/axios";
 import {
   ADD_PAYMENT,
   ADD_PAYMENT_Fail,
@@ -15,12 +15,12 @@ export const checkpayment = (userId) => async (dispatch) => {
   );
 
   try {
-    const { data } = await axios.post(
+    const { data } = await api.post(
       `/Payment/create-checkout-session/${userId}`
     );
     // const session = res.;
 
-    const result = stripe.redirectToCheckout({
+    const result = await stripe.redirectToCheckout({
       sessionId: data.id,
     });
 

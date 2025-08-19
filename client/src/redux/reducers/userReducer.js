@@ -15,6 +15,10 @@ const {
   GETPROF_SUCCESS,
   GETPROF_FAIL,
   LOGOUT,
+  LOGOUT_SUCCESS,
+  EDITUSERS_Success,
+  EDITUSERS,
+  EDITUSERS_Fail,
 } = require("../actionTypes");
 
 const initialState = {
@@ -45,6 +49,7 @@ const userReducer = (state = initialState, { type, payload }) => {
         user: payload.user,
         token: payload.token,
         errors: null,
+        isAuth: true,
       };
     case LOGIN_FAIL:
       return { ...state, loading: false, errors: payload };
@@ -68,6 +73,24 @@ const userReducer = (state = initialState, { type, payload }) => {
       return { ...state, loading: false, errors: payload };
     case LOGOUT:
       return { ...state, loading: false, user: null, isAuth: false };
+    case LOGOUT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        user: null,
+        token: null,
+        isAuth: false,
+      };
+    case EDITUSERS:
+      return { ...state, loading: true };
+    case EDITUSERS_Success:
+      return {
+        ...state,
+        loading: false,
+        user: payload,
+      };
+    case EDITUSERS_Fail:
+      return { ...state, loading: false, errors: payload };
 
     default:
       return state;

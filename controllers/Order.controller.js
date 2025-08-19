@@ -11,9 +11,19 @@ exports.addOrder = async (req, res) => {
       items,
       bill,
       status,
+      date_added,
     });
     await newOrder.save();
   } catch (error) {
     res.status(500).json({ msg: error.message });
   }
 };
+exports.getOrders = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const orders = await Order.find({ userId });
+    res.status(201).json(orders);
+  } catch (err) {
+    res.send(500).send(err);
+  }
+};;

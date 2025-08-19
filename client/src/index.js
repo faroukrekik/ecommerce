@@ -5,6 +5,13 @@ import App from "./App";
 import { Provider } from "react-redux";
 import reportWebVitals from "./reportWebVitals";
 import store from "./redux/store";
+import api from "./utils/axios";
+
+// Initialize axios Authorization header from stored token (persists across reloads)
+const persistedToken = localStorage.getItem("token");
+if (persistedToken) {
+  api.defaults.headers.common["Authorization"] = persistedToken;
+}
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

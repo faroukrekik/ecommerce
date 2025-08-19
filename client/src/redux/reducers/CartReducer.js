@@ -31,13 +31,7 @@ const CartReducer = (state = initialState, { type, payload }) => {
       return { ...state, loading: false, error: payload };
 
     case DELETE_ITEM:
-      return {
-        ...state,
-        cart: {
-          ...state.cart,
-          items: state.cart.items.filter((item) => item._id !== payload),
-        },
-      };
+      return { ...state, cart: payload };
 
     case UPDATECART:
       return {

@@ -14,30 +14,43 @@ const Navbar = () => {
   const { cart } = useSelector((state) => state.CartReducer);
   const dispatch = useDispatch();
   return (
-    <div className="navbar">
+    <div
+      className="navbar"
+      style={{ position: "sticky", top: 0, zIndex: 1200, background: "#fff" }}
+    >
       <div className="nav-logo">
         <p>SHOPPER</p>
       </div>
 
-      <ul className="nav-menu">
-        <li>Home</li>
-
+      <ul
+        className="nav-menu"
+        style={{ display: "flex", gap: 16, alignItems: "center" }}
+      >
+        <Link to={"/"}> Home </Link>
         <Link to={"/shop"}>SHOP</Link>
-        <li>Category</li>
-        <li>Contact</li>
+        <Link to={"/category"}>Category</Link>
+        <Link to={"/contact"}>Contact</Link>
         <div className="box">
           <input type="text" placeholder="Search..." />
           <BsSearch />
         </div>
       </ul>
 
-      <div className="nav-login-cart">
+      <div
+        className="nav-login-cart"
+        style={{ display: "flex", alignItems: "center", gap: 12 }}
+      >
         {isAuth ? (
-          <Deconnexion />
+          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            <span style={{ fontWeight: 500 }}>
+              Hello, {user?.name || "User"}
+            </span>
+            <Deconnexion />
+          </div>
         ) : (
           <div>
             <Link to={"/login"}>
-              <button> login</button>
+              <button>Login</button>
             </Link>
             <Link to={"/register"}>
               <button>Register</button>
@@ -58,7 +71,7 @@ const Navbar = () => {
           >
             <Link to="/shoppingCart">
               <GiShoppingCart
-                onClick={() => dispatch(getCart(user._id))}
+                onClick={() => user && dispatch(getCart(user._id))}
                 className="panier"
               />
             </Link>

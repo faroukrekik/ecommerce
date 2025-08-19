@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../componenrs/deconnexion.css";
 import { useDispatch, useSelector } from "react-redux";
-import { logoutuser } from "../redux/actions/userActions";
+import { logout } from "../redux/actions/userActions";
 
 const Deconnexion = () => {
   const { user } = useSelector((state) => state.userReducer);
@@ -12,8 +12,7 @@ const Deconnexion = () => {
     setToggle(!toggle);
   };
   const logoutFunc = () => {
-    localStorage.removeItem("token");
-    dispatch(logoutuser());
+    dispatch(logout());
   };
 
   return (
@@ -39,36 +38,56 @@ const Deconnexion = () => {
             <h2>{user.name}</h2>
           </div>
           <hr />
-          <a href="#" className="sub-menu-link">
+          <button
+            type="button"
+            className="sub-menu-link"
+            style={{ background: "none", border: 0, padding: 0 }}
+            onClick={() => (window.location.href = "/profile/edit")}
+          >
             <img src={user.image} alt="" />
             <p>Edit profile</p>
             <span>{">"}</span>
-          </a>
-          <a href="#" className="sub-menu-link">
+          </button>
+          <button
+            type="button"
+            className="sub-menu-link"
+            style={{ background: "none", border: 0, padding: 0 }}
+            onClick={() => (window.location.href = "/settings")}
+          >
             <img
               src="https://w7.pngwing.com/pngs/828/543/png-transparent-computer-icons-service-technology-setting-miscellaneous-service-business-thumbnail.png"
               alt="setting"
             />
             <p>setting & Privacy</p>
             <span>{">"}</span>
-          </a>
-          <a href="#" className="sub-menu-link">
+          </button>
+          <button
+            type="button"
+            className="sub-menu-link"
+            style={{ background: "none", border: 0, padding: 0 }}
+            onClick={() => (window.location.href = "/help")}
+          >
             <img
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsTSlJr8sa9DG8h6_3M9PhSinXrsbA82vOVQ&s"
               alt="help"
             />
             <p>Help & support</p>
             <span>{">"}</span>
-          </a>
-          <a href="#" className="sub-menu-link">
+          </button>
+          <button
+            type="button"
+            className="sub-menu-link"
+            onClick={logoutFunc}
+            style={{ background: "none", border: 0, padding: 0 }}
+          >
             <img
               src="https://cdn1.iconfinder.com/data/icons/heroicons-ui/24/logout-512.png"
               alt="logout"
             />
 
-            <p onClick={() => dispatch(logoutFunc())}>logout</p>
+            <p>logout</p>
             <span>{">"}</span>
-          </a>
+          </button>
         </div>
       </div>
     </div>

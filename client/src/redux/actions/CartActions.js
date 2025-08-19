@@ -8,7 +8,7 @@ import {
   GET_CART_SUCCESS,
   UPDATECART,
 } from "../actionTypes";
-import axios from "axios";
+import api from "../../utils/axios";
 
 export const addcart = (productId, quantity, userId) => async (dispatch) => {
   dispatch({
@@ -16,12 +16,9 @@ export const addcart = (productId, quantity, userId) => async (dispatch) => {
   });
 
   try {
-    const { data } = await axios.post(
-      `/Carts/add_cart/${userId}/${productId}`,
-      {
-        quantity,
-      }
-    );
+    const { data } = await api.post(`/Carts/add_cart/${userId}/${productId}`, {
+      quantity: Number(quantity) || 1,
+    });
 
     dispatch({
       type: ADD_CART_SUCCESS,
@@ -40,7 +37,7 @@ export const getCart = (userId) => async (dispatch) => {
     type: GET_CART,
   });
   try {
-    const { data } = await axios.get(`/Carts/get_cart/${userId}`);
+    const { data } = await api.get(`/Carts/get_cart/${userId}`);
     dispatch({
       type: GET_CART_SUCCESS,
       payload: data,
@@ -55,13 +52,10 @@ export const getCart = (userId) => async (dispatch) => {
 
 export const removeitem = (userId, productId) => async (dispatch) => {
   try {
-    const { data } = await axios.delete(
+    const { data } = await api.delete(
       `/Carts/delete_cart/${userId}/${productId}`
     );
-    dispatch({
-      type: DELETE_ITEM,
-      payload: data,
-    });
+    dispatch({ type: DELETE_ITEM, payload: data });
     alert("item deleted");
   } catch (error) {
     alert("item  not deleted");
@@ -70,7 +64,7 @@ export const removeitem = (userId, productId) => async (dispatch) => {
 
 export const editqunt = (userId, productId, quantity) => async (dispatch) => {
   try {
-    const { data } = await axios.put(
+    const { data } = await api.put(
       `/Carts/editquantity/${userId}/${productId}`,
       {
         quantity,

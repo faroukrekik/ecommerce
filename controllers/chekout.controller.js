@@ -33,6 +33,6 @@ exports.makePayment = async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: "Something went wrong" });
     console.log(error);
-    console.log(userId)
+    console.log(userId);
   }
 };

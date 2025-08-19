@@ -1,7 +1,7 @@
 import {
-  ADD_CART_FAIL,
   ADD_PAYMENT,
   ADD_PAYMENT_Success,
+  ADD_PAYMENT_Fail,
 } from "../actionTypes";
 
 const initialState = {
@@ -16,8 +16,8 @@ const PayReducer = (state = initialState, { type, payload }) => {
       return { ...state, loading: true };
     case ADD_PAYMENT_Success:
       return { ...state, loading: false, checkout: payload };
-    case ADD_CART_FAIL:
-      return { ...state, laoding: false, error: payload };
+    case ADD_PAYMENT_Fail:
+      return { ...state, loading: false, error: payload };
 
     default:
       return state;

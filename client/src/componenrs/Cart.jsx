@@ -10,20 +10,20 @@ import { checkpayment } from "../redux/actions/Payment";
 
 const Cart = () => {
   const { cart, loading } = useSelector((state) => state.CartReducer);
-  const { Product } = useSelector((state) => state.prodReducer);
   const { user } = useSelector((state) => state.userReducer);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getProfile());
     dispatch(getProd());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
-    if (user) {
+    if (user && user._id) {
       dispatch(getCart(user._id));
     }
-  }, [user]);
+  }, [user, dispatch]);
 
   const handlesubmit = () => {
     dispatch(checkpayment(user._id));
